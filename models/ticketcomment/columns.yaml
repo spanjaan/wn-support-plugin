@@ -1,0 +1,17 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    author:
+        label: spanjaan.support::lang.fields.author
+        searchable: true
+    content:
+        label: spanjaan.support::lang.fields.comment
+        type: partial
+        path: ~/plugins/spanjaan/support/controllers/tickets/_comment_content.htm
+    is_support:
+        label: spanjaan.support::lang.fields.is_support
+        type: switch
+    created_at:
+        label: spanjaan.support::lang.fields.created_at

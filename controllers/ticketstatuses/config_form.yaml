@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: spanjaan.support::lang.ticketstatus.label
+
+# Model Form Field configuration
+form: $/spanjaan/support/models/ticketstatus/fields.yaml
+
+# Model Class name
+modelClass: SpAnjaan\Support\Models\TicketStatus
+
+# Default redirect location
+defaultRedirect: spanjaan/support/ticketstatuses
+
+# Create page
+create:
+    title: spanjaan.support::lang.ticketstatus.create_title
+    redirect: spanjaan/support/ticketstatuses/update/:id
+    redirectClose: spanjaan/support/ticketstatuses
+
+# Update page
+update:
+    title: spanjaan.support::lang.ticketstatus.update_title
+    redirect: spanjaan/support/ticketstatuses
+    redirectClose: spanjaan/support/ticketstatuses
+
+# Preview page
+preview:
+    title: spanjaan.support::lang.ticketstatus.preview_title

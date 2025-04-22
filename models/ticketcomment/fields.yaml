@@ -1,0 +1,16 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    author:
+        label: spanjaan.support::lang.fields.author
+        type: dropdown
+    content:
+        label: spanjaan.support::lang.fields.content
+        type: richeditor
+    is_support:
+        label: spanjaan.support::lang.fields.is_support
+        type: switch
+        default: true
+        span: left

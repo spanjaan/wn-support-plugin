@@ -1,0 +1,61 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    hash_id@create:
+        label: spanjaan.support::lang.fields.hash_id
+        type: text
+        span: left
+        disabled: true
+    hash_id@update:
+        label: spanjaan.support::lang.fields.hash_id
+        type: partial
+        span: left
+    creator@create:
+        label: spanjaan.support::lang.fields.ticket_creator
+        type: relation
+        nameFrom: email
+        span: right
+    creator@update:
+        label: spanjaan.support::lang.fields.ticket_creator
+        type: partial
+        span: right
+    priority:
+        label: spanjaan.support::lang.fields.priority
+        type: relation
+        selectFrom: name
+        span: left
+    user:
+        label: spanjaan.support::lang.fields.assigned_user
+        type: dropdown
+        span: right
+    status:
+        label: spanjaan.support::lang.fields.status
+        type: relation
+        selectFrom: name
+        span: left
+    category:
+        label: spanjaan.support::lang.fields.category
+        type: relation
+        selectFrom: name
+        span: right
+    topic:
+        label: spanjaan.support::lang.fields.topic
+        type: text
+        span: left
+    files:
+        label: spanjaan.support::lang.fields.files
+        type: partial
+        span: right
+    content@create:
+        label: spanjaan.support::lang.fields.content
+        type: richeditor
+        span: left
+    content@update:
+        label: spanjaan.support::lang.fields.content
+        type: partial
+        span: left
+    comments:
+        label: spanjaan.support::lang.fields.comments
+        type: partial

@@ -1,0 +1,102 @@
+<div class="card p-2 p-sm-4 shadow-lg">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-uppercase text-dark">{{ 'Ticket'|_ }} {{ ticket.hash_id }}</h2>
+        <p class="text-muted mb-2">{{ 'Last Updated'|_ }}: <strong>{{ ticket.updated_at }}</strong></p>
+        <a href="{{ 'support/tickets' | page }}" class="btn btn-outline-primary btn-sm">{{ 'Go to ticket list'|_ }}</a>
+        <a href="{{ 'support/create-ticket' | page }}" class="btn btn-outline-primary btn-sm">{{ 'Create a new ticket'|_ }}</a>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h5 class="fw-semibold">{{ 'Current Status'|_ }}: 
+                <span class="badge 
+                {% if ticket.status.name == 'Pending' %}
+                    bg-warning text-dark
+                {% elseif ticket.status.name == 'Resolved' %}
+                    bg-success
+                {% elseif ticket.status.name == 'Closed' %}
+                    bg-dark
+                {% else %}
+                    bg-info
+                {% endif %}
+                py-2 px-3">{{ ticket.status.name|_ }}</span>
+            </h5>
+        </div>
+        <div class="col-md-6 text-md-end">
+            <h5 class="fw-semibold">{{ 'Category:'|_ }} 
+                <span class="text-muted">{{ ticket.category.name|_ }}</span>
+            </h5>
+        </div>
+    </div>
+
+    <div class="mb-4 card border-0 shadow-sm">
+        <div class="bg-primary p-3 rounded-top">
+            <h5 class="mb-0 text-light">{{ ticket.topic }}</h5>
+        </div>
+        <div class="p-4">
+            {{ ticket.content|raw }}
+        </div>
+    </div>
+
+    <h5 class="fw-bold text-dark mb-3">{{ 'Comments :'|_ }}</h5>
+    <hr class="mb-3 border border-primary border-2">
+    <div id="commentsList" >
+        {% partial '@_comments' ticket=ticket %}
+    </div>
+
+    <hr class="mb-3">
+
+    <h5 class="fw-bold text-dark">{{ 'Add Comment :'|_ }}</h5>
+    <hr class="mb-3 border border-primary border-2">
+    <form id="commentForm" method="post" data-request="onAddComment" data-request-flash data-request-update="'@_comments': '#commentsList'">
+        <input type="hidden" name="ticket_number" value="{{ ticket.hash_id }}"/>
+        
+        <div class="mb-3">
+            <label for="comment_content" class="form-label fw-semibold">{{ 'Your comment'|_ }}</label>
+            <textarea class="form-control border-primary shadow-sm" id="comment_content" name="comment_content" rows="4" placeholder="{{ 'Type your comment here'|_ }}"></textarea>
+        </div>
+        
+        <div class="d-grid">
+            <button data-attach-loading type="submit" class="btn btn-primary fw-bold">{{ 'Submit'|_ }}</button>
+        </div>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function initializeEditor() {
+                tinymce.init({
+                    selector: '#comment_content',
+                    menubar: false,
+                    height: 200,
+                    license_key: 'gpl',
+                    skin: 'oxide-dark', 
+                    content_css: 'dark'  
+                });
+            }
+
+            function clearEditor() {
+                const editor = tinymce.get('comment_content');
+                if (editor) {
+                    editor.setContent('');
+                }
+            }
+
+            initializeEditor();
+
+            const commentForm = document.getElementById('commentForm');
+            if (!commentForm) {
+                console.warn('Comment form not found.');
+                return;
+            }
+
+            commentForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                clearEditor();
+            });
+
+            document.addEventListener('ajaxUpdateComplete', function() {
+                initializeEditor();
+            });
+        });
+    </script>
+</div>

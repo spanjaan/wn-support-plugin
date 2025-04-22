@@ -1,0 +1,44 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+# Model List Column configuration
+list: $/spanjaan/support/models/ticketpriority/columns.yaml
+
+# Model Class name
+modelClass: SpAnjaan\Support\Models\TicketPriority
+
+# List Title
+title: spanjaan.support::lang.ticketpriority.list_title
+
+# Link URL for each record
+recordUrl: spanjaan/support/ticketpriorities/update/:id
+
+# Message to display if the list is empty
+noRecordsMessage: backend::lang.list.no_records
+
+# Records to display per page
+recordsPerPage: 20
+
+# Displays the list column set up button
+showSetup: true
+
+# Displays the sorting link on each column
+showSorting: true
+
+# Default sorting column
+# defaultSort:
+#     column: created_at
+#     direction: desc
+
+# Display checkboxes next to each record
+showCheckboxes: true
+
+# Toolbar widget configuration
+toolbar:
+    # Partial for toolbar buttons
+    buttons: list_priorities_toolbar
+
+    # Search widget configuration
+    search:
+        prompt: backend::lang.list.search_prompt

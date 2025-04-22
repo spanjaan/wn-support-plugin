@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: spanjaan.support::lang.ticketpriority.label
+
+# Model Form Field configuration
+form: $/spanjaan/support/models/ticketpriority/fields.yaml
+
+# Model Class name
+modelClass: SpAnjaan\Support\Models\TicketPriority
+
+# Default redirect location
+defaultRedirect: spanjaan/support/ticketpriorities
+
+# Create page
+create:
+    title: spanjaan.support::lang.ticketpriority.create_title
+    redirect: spanjaan/support/ticketpriorities/update/:id
+    redirectClose: spanjaan/support/ticketpriorities
+
+# Update page
+update:
+    title: spanjaan.support::lang.ticketpriority.update_title
+    redirect: spanjaan/support/ticketpriorities
+    redirectClose: spanjaan/support/ticketpriorities
+
+# Preview page
+preview:
+    title: spanjaan.support::lang.ticketpriority.preview_title

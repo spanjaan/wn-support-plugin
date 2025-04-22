@@ -1,0 +1,33 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+columns:
+    id:
+        label: spanjaan.support::lang.fields.number
+    priority:
+        label: spanjaan.support::lang.fields.priority
+        relation: priority
+        valueFrom: name
+    status:
+        label: spanjaan.support::lang.fields.status
+        relation: status
+        valueFrom: name
+    user:
+        label: spanjaan.support::lang.fields.assigned_user
+        relation: user
+        valueFrom: email
+    hash_id:
+        label: spanjaan.support::lang.fields.hash_id
+    creator:
+        label: spanjaan.support::lang.fields.ticket_creator
+        relation: creator
+        valueFrom: email
+    category:
+        label: spanjaan.support::lang.fields.category
+        relation: category
+        valueFrom: name
+    created_at:
+        label: spanjaan.support::lang.fields.created_at
+    updated_at:
+        label: spanjaan.support::lang.fields.updated_at

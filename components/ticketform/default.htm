@@ -1,0 +1,110 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.4.1/tinymce.min.js" integrity="sha512-TDS3vtbiUCZzBBZO8LFud171Hw+ykrQgkrvjwV+i+XsI0LC46PR4affO+9VbgcR79KreoN7J0HKup9mrle4gRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<div class="shadow-sm mb-4 p-4 card">
+    <h3 class="text-center mb-4 text-uppercase">{{ 'Create a New Ticket'|_ }}</h3>
+    <div class="text-center mb-3">
+        <a href="{{ 'support/tickets' | page }}" class="btn btn-outline-primary btn-sm">{{ 'Go to Ticket List'|_ }}</a>
+    </div>
+    <hr class="mb-4 border border-primary border-2">
+
+    <!-- Ticket Form -->
+    <form data-request="onTicketCreate" class="needs-validation" novalidate>
+        
+        <!-- Website Field -->
+        <div class="form-floating mb-4">
+            <input 
+                type="text" 
+                class="form-control shadow-sm" 
+                id="website" 
+                name="website" 
+                placeholder="{{ 'Your website'|_ }}" 
+                required 
+                aria-describedby="websiteHelp"
+            />
+            <label for="website">{{ 'Website'|_ }}</label>
+            <div class="invalid-tooltip">{{ 'Please provide your website.'|_ }}</div>
+        </div>
+        
+        <!-- Category Dropdown -->
+        <div class="form-floating mb-4">
+            <select class="form-select shadow-sm" id="category" name="category" required>
+                <option value="" selected disabled>{{ 'Please select category'|_ }}</option>
+                {% for id, title in categories %}
+                    <option value="{{ id }}">{{ title }}</option>
+                {% endfor %}
+            </select>
+            <label for="category">{{ 'Category'|_ }}</label>
+            <div class="invalid-tooltip">{{ 'Please select a category.'|_ }}</div>
+        </div>
+        
+        <!-- Ticket Topic Field -->
+        <div class="form-floating mb-4">
+            <input 
+                type="text" 
+                class="form-control shadow-sm" 
+                id="topic" 
+                name="topic" 
+                placeholder="{{ 'Please enter topic'|_ }}" 
+                required
+            />
+            <label for="topic">{{ 'Ticket Topic'|_ }}</label>
+            <div class="invalid-tooltip">{{ 'Please provide a ticket topic.'|_ }}</div>
+        </div>
+        
+        <!-- Description Field (TinyMCE) -->
+        <div class="mb-4">
+            <label for="content" class="form-label fw-semibold">{{ 'Description'|_ }}</label>
+            <textarea 
+                class="form-control shadow-sm" 
+                id="content" 
+                name="content" 
+                rows="8" 
+                required
+                aria-describedby="contentHelp"
+            ></textarea>
+            <div class="invalid-tooltip">{{ 'Please provide a description for the ticket.'|_ }}</div>
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="d-grid">
+            <button data-attach-loading type="submit" class="btn btn-primary w-100 fw-bold py-3 shadow-sm">{{ 'Submit'|_ }}</button>
+        </div>
+    </form>
+</div>
+
+<!-- TinyMCE Initialization Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function initializeEditor() {
+            tinymce.init({
+                selector: '#content',
+                menubar: false,
+                height: 250,
+                license_key: 'gpl',
+                skin: 'oxide-dark',  // Optional dark theme for TinyMCE
+                content_css: 'dark'  // Match editor content with the dark theme
+            });
+        }
+
+        function clearEditor() {
+            const editor = tinymce.get('content');
+            if (editor) {
+                editor.setContent('');
+            }
+        }
+
+        initializeEditor();
+
+        const form = document.querySelector('form.needs-validation');
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+
+        document.addEventListener('ajaxUpdateComplete', function () {
+            initializeEditor();  // Re-initialize TinyMCE after partial reload
+        });
+    });
+</script>

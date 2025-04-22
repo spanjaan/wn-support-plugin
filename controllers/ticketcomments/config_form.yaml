@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: spanjaan.support::lang.ticketcomment.label
+
+# Model Form Field configuration
+form: $/spanjaan/support/models/ticketcomment/fields.yaml
+
+# Model Class name
+modelClass: SpAnjaan\Support\Models\TicketComment
+
+# Default redirect location
+defaultRedirect: spanjaan/support/ticketcomments
+
+# Create page
+create:
+    title: spanjaan.support::lang.ticketcomment.create_title
+    redirect: spanjaan/support/ticketcomments/update/:id
+    redirectClose: spanjaan/support/ticketcomments
+
+# Update page
+update:
+    title: spanjaan.support::lang.ticketcomment.update_title
+    redirect: spanjaan/support/ticketcomments
+    redirectClose: spanjaan/support/ticketcomments
+
+# Preview page
+preview:
+    title: spanjaan.support::lang.ticketcomment.preview_title

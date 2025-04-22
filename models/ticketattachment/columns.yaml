@@ -1,0 +1,31 @@
+# ===================================
+#  Column Definitions
+# ===================================
+
+columns:
+
+  ticket_id:
+    label: spanjaan.support::lang.fields.ticket_id
+    searchable: true
+
+  file_name:
+    label: spanjaan.support::lang.fields.file_name
+    searchable: true
+
+  file_path:
+    label: spanjaan.support::lang.fields.file_path
+    searchable: true
+
+  file_size:
+    label: spanjaan.support::lang.fields.file_size
+    searchable: false
+
+  created_at:
+    label: spanjaan.support::lang.fields.created_at
+    type: date
+    invisible: true
+
+  updated_at:
+    label: spanjaan.support::lang.fields.updated_at
+    type: date
+    invisible: true

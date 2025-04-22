@@ -1,0 +1,13 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+comments:
+    label: Comments
+    view:
+        list: ~/plugins/spanjaan/support/models/ticketcomment/columns.yaml
+        toolbarButtons: create|delete
+        showSearch: true
+    manage:
+        list: ~/plugins/spanjaan/support/models/ticketcomment/columns.yaml
+        form: ~/plugins/spanjaan/support/models/ticketcomment/fields.yaml

@@ -1,0 +1,92 @@
+
+<div id="ticket-list" class="p-4 card shadow-sm">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">{{ 'Support Tickets'|_ }}</h1>
+        <a href="{{ 'support/create-ticket'|page }}" class="btn btn-primary" role="button">{{ 'Create New Ticket'|_ }}</a>
+    </div>
+
+    <div class="bg-primary rounded-2 text-center mb-3">
+        <h5 class="mb-0 py-3 text-white">{{ 'My Tickets'|_ }}</h5>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>{{ 'Ticket Number'|_ }}</th>
+                    <th>{{ 'Ticket Topic'|_ }}</th>
+                    <th>{{ 'Ticket Status'|_ }}</th>
+                    <th>{{ 'Last Update'|_ }}</th>
+                    <th>{{ 'Ticket Details'|_ }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <!-- Ticket Number -->
+                        <td class="align-middle">
+                            <a class="text-primary fw-semibold" href="{{ ticket_page }}{{ ticket.hash_id }}">
+                                {{ ticket.hash_id }}
+                            </a>
+                        </td>
+                        
+                        <!-- Ticket Topic -->
+                        <td class="align-middle">{{ ticket.topic }}</td>
+                        
+                        <!-- Ticket Status -->
+                        <td class="align-middle">
+                            <span class="badge 
+                                {% if ticket.status.name == 'Pending' %}
+                                    bg-warning text-dark
+                                {% elseif ticket.status.name == 'Resolved' %}
+                                    bg-success
+                                {% elseif ticket.status.name == 'Closed' %}
+                                    bg-dark
+                                {% else %}
+                                    bg-info
+                                {% endif %}
+                            ">
+                                {{ ticket.status.name|_ }}
+                            </span>
+                        </td>
+                        
+                        <!-- Last Update -->
+                        <td class="align-middle">{{ ticket.updated_at|date('M d, Y') }}</td>
+                        
+                        <!-- View Button -->
+                        <td class="align-middle">
+                            <a href="{{ ticket_page }}{{ ticket.hash_id }}" 
+                            class="btn btn-secondary btn-sm shadow-secondary d-inline-flex align-items-center" 
+                            aria-label="View Ticket {{ ticket.hash_id }}">
+                                <i class='bx bxs-show me-2' aria-hidden="true"></i>
+                                View
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">{{ 'No tickets found'|_ }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <nav class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if tickets.hasPages %}
+                <li class="page-item {% if not tickets.previousPageUrl %}disabled{% endif %}">
+                    <a class="page-link" href="{{ tickets.previousPageUrl }}" aria-label="Previous">{{ 'Previous'|_ }}</a>
+                </li>
+                {% for page, url in tickets.pageLinks %}
+                    <li class="page-item {% if tickets.currentPage == page %}active{% endif %}">
+                        <a class="page-link" href="{{ url }}" aria-label="Page {{ page }}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+                <li class="page-item {% if not tickets.nextPageUrl %}disabled{% endif %}">
+                    <a class="page-link" href="{{ tickets.nextPageUrl }}" aria-label="Next">{{ 'Next'|_ }}</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
