@@ -1,5 +1,5 @@
 {
-    "name": "spanjaan/support",
+    "name": "spanjaan/wn-support-plugin",
     "type": "winter-plugin",
     "description": "A simple ticket system for WinterCMS",
     "license": "MIT",
